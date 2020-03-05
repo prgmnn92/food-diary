@@ -1,0 +1,12 @@
+.item {
+
+    cursor: pointer;
+    .toast {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 10px; 
+    }
+    .item-text {
+        margin: 0 10px;
+    }
+}

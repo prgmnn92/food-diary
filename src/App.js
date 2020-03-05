@@ -1,26 +1,102 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import axios, { params } from './axios';
+import { InputGroupAddon, InputGroup, Input, Button } from 'reactstrap';
+
+import ItemList from './components/item-list/item-list.component';
+import ItemCard from './components/item-card/item-card.component';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+	state = {
+		hits: [],
+		searchInput: '',
+		item: null,
+		itemList: []
+	};
+
+	componentDidMount() {
+		this.searchItems();
+	}
+
+	searchItems = async (searchString) => {
+		if (!searchString) {
+			return;
+		}
+		await axios
+			.get('/search/' + searchString, {
+				params
+			})
+			.then((response) => {
+				console.log(response);
+				this.setState({ hits: [ ...response.data.hits ] });
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	getItem = async (id) => {
+		await axios
+			.get('/item?id=' + id, {
+				params
+			})
+			.then((res) => {
+				console.log(res);
+				this.setState({
+					item: res.data
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	addToList = (item) => {
+		console.log(item);
+		this.setState({
+			itemList: [ ...this.state.itemList, item ]
+		});
+	};
+
+	render() {
+		return (
+			<div className="App scrollable">
+				<h1>Food Diary</h1>
+				<div className="grid ">
+					<div className="grid-column ">
+						<InputGroup className="input-group">
+							<Input
+								placeholder="Search for food"
+								onChange={(val) => this.setState({ searchInput: val.target.value })}
+							/>
+							<InputGroupAddon addonType="append">
+								<Button onClick={() => this.searchItems(this.state.searchInput)} color="primary">
+									To the Right!
+								</Button>
+							</InputGroupAddon>
+						</InputGroup>
+
+						<ItemList clickEvent={this.getItem} items={this.state.hits} />
+					</div>
+					<div className="grid-column">
+						{this.state.item !== null ? (
+							<ItemCard clickEvent={this.addToList} item={this.state.item} />
+						) : null}
+
+						{this.state.itemList.length > 0 ? (
+							this.state.itemList.map((item) => {
+								return <h4>{item.item_name}</h4>;
+							})
+						) : null}
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;
