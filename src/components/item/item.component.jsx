@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Toast, ToastBody, ToastHeader, Button } from "reactstrap";
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
 
 import "./item.styles.scss";
 
@@ -8,7 +8,7 @@ const Item = ({ item, clickEvent }) => (
   <div className="item" onClick={() => clickEvent(item.fields.item_id)}>
     <Toast className="toast">
       <ToastHeader className="toast-header">
-        {item.fields.item_name}
+        {!!item.fields.item_name ? item.fields.item_name : item.itemName}
       </ToastHeader>
       <ToastBody className="toast-body">
         <span className="toast-text">brand name: {item.fields.brand_name}</span>
@@ -18,10 +18,6 @@ const Item = ({ item, clickEvent }) => (
         <span className="toast-text">
           unit: {item.fields.nf_serving_size_unit}
         </span>
-
-        <Button style={{ zIndex: -1 }} id="pop" type="button">
-          Details
-        </Button>
       </ToastBody>
     </Toast>
   </div>

@@ -1,13 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import Item from '../item/item.component';
+import "./item-list.styles.scss";
+import Item from "../item/item.component";
 
-const ItemList = ({ items, clickEvent }) => (
-	<div>
-		{items.map((item) => {
-			return <Item clickEvent={clickEvent} key={item.fields.item_id} item={item} />;
-		})}
-	</div>
+const ItemList = items => (
+  <div>{items.length > 0 ? items.map(item => <Item item={item} />) : null}</div>
 );
 
 export default ItemList;
