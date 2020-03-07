@@ -6,6 +6,7 @@ import { InputGroupAddon, InputGroup, Input, Button } from "reactstrap";
 import SearchResultList from "./components/search-result-list/search-result-list";
 import ItemCard from "./components/item-card/item-card.component";
 import ItemList from "./components/item-list/item-list.component";
+import HeaderTotals from "./components/header-totals/header-totals.component";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,17 +14,7 @@ import "./App.css";
 
 class App extends React.Component {
   state = {
-    hits: [
-      {
-        fields: {
-          item_id: "513fceb675b8dbbc210026a5",
-          item_name: "White Bread - 1 slice, large",
-          brand_name: "USDA",
-          nf_serving_size_qty: 1,
-          nf_serving_size_unit: "serving"
-        }
-      }
-    ],
+    hits: [],
     searchInput: "",
     item: null,
     itemList: [],
@@ -95,51 +86,66 @@ class App extends React.Component {
   };
 
   render() {
+    let total = {
+      protein: 0,
+      fats: 0,
+      carbohydrates: 0,
+      calories: 0
+    };
+
+    if (this.state.itemList.length > 0) {
+      total = {
+        protein: this.state.itemList.reduce(
+          (acc, item) => item.proteins + acc,
+          0
+        ),
+        fats: this.state.itemList.reduce((acc, item) => item.fats + acc, 0),
+        carbohydrates: this.state.itemList.reduce(
+          (acc, item) => item.carbohydrates + acc,
+          0
+        ),
+        calories: this.state.itemList.reduce(
+          (acc, item) => item.calories + acc,
+          0
+        )
+      };
+    }
+
     return (
-      <div className="App scrollable">
-        <h1>Food Diary</h1>
+      <div>
+        <HeaderTotals total={total} />
+        <div className="App scrollable">
+          <div className="grid ">
+            <div className="grid-column ">
+              <InputGroup className="input-group">
+                <Input
+                  placeholder="Search for food"
+                  onChange={val =>
+                    this.setState({ searchInput: val.target.value })
+                  }
+                />
+                <InputGroupAddon addonType="append">
+                  <Button
+                    onClick={() => this.searchItems(this.state.searchInput)}
+                    color="primary"
+                  >
+                    To the Right!
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
 
-        <div className="grid ">
-          <div className="grid-column ">
-            <InputGroup className="input-group">
-              <Input
-                placeholder="Search for food"
-                onChange={val =>
-                  this.setState({ searchInput: val.target.value })
-                }
+              <SearchResultList
+                clickEvent={this.getItem}
+                items={this.state.hits}
               />
-              <InputGroupAddon addonType="append">
-                <Button
-                  onClick={() => this.searchItems(this.state.searchInput)}
-                  color="primary"
-                >
-                  To the Right!
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
+            </div>
+            <div className="grid-column">
+              {this.state.item !== null ? (
+                <ItemCard addToList={this.addToList} item={this.state.item} />
+              ) : null}
 
-            <SearchResultList
-              clickEvent={this.getItem}
-              items={this.state.hits}
-            />
-          </div>
-          <div className="grid-column">
-            {this.state.item !== null ? (
-              <ItemCard addToList={this.addToList} item={this.state.item} />
-            ) : null}
-            {this.state.itemList.length > 0
-              ? this.state.itemList.map(item => {
-                  return <h4>{item.itemName}</h4>;
-                })
-              : null}
-            Proteins:{" "}
-            {this.state.itemList.length > 0
-              ? this.state.itemList.reduce((acc, item) => {
-                  console.log(acc);
-                  return item.proteins + acc;
-                }, 0)
-              : null}
-            <ItemList items={this.state.itemList} />
+              <ItemList items={this.state.itemList} />
+            </div>
           </div>
         </div>
       </div>

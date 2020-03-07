@@ -8,7 +8,7 @@ const Item = ({ item, clickEvent }) => (
   <div className="item" onClick={() => clickEvent(item.fields.item_id)}>
     <Toast className="toast">
       <ToastHeader className="toast-header">
-        {!!item.fields.item_name ? item.fields.item_name : item.itemName}
+        {item.fields.item_name}
       </ToastHeader>
       <ToastBody className="toast-body">
         <span className="toast-text">brand name: {item.fields.brand_name}</span>

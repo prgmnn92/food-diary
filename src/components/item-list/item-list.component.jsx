@@ -1,10 +1,15 @@
 import React from "react";
 
 import "./item-list.styles.scss";
-import Item from "../item/item.component";
 
-const ItemList = items => (
-  <div>{items.length > 0 ? items.map(item => <Item item={item} />) : null}</div>
+import AddedItem from "../added-item/added-item.component";
+
+const ItemList = ({ items }) => (
+  <div>
+    {items.map(item => (
+      <AddedItem item={item} />
+    ))}
+  </div>
 );
 
 export default ItemList;
