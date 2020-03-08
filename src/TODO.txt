@@ -5,3 +5,4 @@ TODO:
 4. Improve design
 5. Persistor ? 
 6. Choose a font
+7. Delete from list

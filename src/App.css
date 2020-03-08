@@ -1,12 +1,11 @@
-.app {
-  width: 100%;
-}
 
-.app-body {
-  margin-top: 100px;
+.App {
   width: 100%;
+  height: 100%;
+  padding: 0 50px;
+  font-family: 'Poppins', sans-serif;
 
-  padding: 20px;
+
   z-index: 1;
 
 
@@ -21,8 +20,7 @@ h1 {
 
 .scrollable {
   overflow: scroll;
-  overflow-x: hidden;
-  scrollbar-width: 100px;
+  overflow-x: auto;
 }
 
 .scrollable::-webkit-scrollbar {
@@ -31,18 +29,26 @@ h1 {
 
 .input-group {
   margin-bottom: 15px;
+
+  grid-area: 2 / 1 / 3 / 3;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 40px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 50px;
+  grid-row-gap: 25px;
+  height: 100%;
+  
+  overflow: hidden;
 
 }
 
 .grid-column {
   display: flex;
   flex-flow: column;
+
 }
 
 
