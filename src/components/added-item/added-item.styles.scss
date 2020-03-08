@@ -1,8 +1,17 @@
 .added-item {
 
-    .toast-body{
-        display: flex;
+    .toast {
 
-        justify-content: space-around;
+        width: 100%;
+        max-width: none;
+        margin-bottom: 10px;
+
+
+        .toast-body {
+            display: flex;
+
+            justify-content: space-around;
+        }
     }
+
 }

@@ -1,0 +1,21 @@
+.item-card {
+
+    width: 400px;
+    height: 380px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -190px;
+
+
+    .card-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+
+        .tags {
+            font-weight: bold;
+        }
+    }
+}

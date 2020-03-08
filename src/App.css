@@ -1,36 +1,41 @@
-.App {
-  height: 750px;
-  width: 900px;
-  border: 1px solid black;
-  border-radius: 7px;
+.app {
+  width: 100%;
+}
+
+.app-body {
+  margin-top: 100px;
+  width: 100%;
+
   padding: 20px;
- 
+  z-index: 1;
+
 
 
 }
 
 
 h1 {
-  margin-bottom:  15px;
+  margin-bottom: 15px;
   text-align: center;
 }
+
 .scrollable {
   overflow: scroll;
   overflow-x: hidden;
   scrollbar-width: 100px;
 }
 
-.scrollable::-webkit-scrollbar { 
-  display: none;  
+.scrollable::-webkit-scrollbar {
+  display: none;
 }
-  
+
 .input-group {
   margin-bottom: 15px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 40px;
 
 }
@@ -38,4 +43,12 @@ h1 {
 .grid-column {
   display: flex;
   flex-flow: column;
+}
+
+
+
+.third {
+  grid-column-start: 3;
+  grid-column-end: 4;
+
 }
