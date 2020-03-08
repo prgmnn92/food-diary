@@ -1,0 +1,6 @@
+TODO:
+1. Feedback if item wasnt found
+2. Check quantity input
+3. Adding CountingNumbers
+4. Improve design
+5. Persistor ? 
