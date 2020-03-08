@@ -4,3 +4,4 @@ TODO:
 3. Adding CountingNumbers
 4. Improve design
 5. Persistor ? 
+6. Choose a font
