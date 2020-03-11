@@ -4,10 +4,10 @@ import "./item-list.styles.scss";
 
 import AddedItem from "../added-item/added-item.component";
 
-const ItemList = ({ items }) => (
+const ItemList = ({ items, removeItem }) => (
   <div className="item-list">
     {items.map((item, id) => (
-      <AddedItem key={id} item={item} />
+      <AddedItem removeItem={removeItem} key={id} id={id} item={item} />
     ))}
   </div>
 );

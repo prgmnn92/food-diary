@@ -83,6 +83,15 @@ class App extends React.Component {
       calories: calories
     };
   };
+  removeItem = id => {
+    let arr = this.state.itemList;
+
+    arr.splice(id, 1);
+
+    this.setState({
+      itemList: [...arr]
+    });
+  };
 
   render() {
     let total = {
@@ -112,6 +121,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <div class="header-background" />
         <div className="grid">
           <HeaderTotals total={total} />
 
@@ -123,7 +133,7 @@ class App extends React.Component {
             <ItemCard addToList={this.addToList} item={this.state.item} />
           ) : null}
 
-          <ItemList items={this.state.itemList} />
+          <ItemList removeItem={this.removeItem} items={this.state.itemList} />
         </div>
       </div>
     );

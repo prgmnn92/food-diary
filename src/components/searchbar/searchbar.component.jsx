@@ -13,14 +13,22 @@ const Searchbar = ({ searchItems }) => {
         <Input
           placeholder="Search for food"
           onKeyPress={e =>
-            e.key === "Enter" ? searchItems(searchInput) : null
+            e.key === "Enter"
+              ? searchInput.length > 0
+                ? searchItems(searchInput)
+                : alert("Empty Input")
+              : null
           }
           onChange={val => setSearchInput(val.target.value)}
         />
         <InputGroupAddon addonType="append">
           <Button
             type="Submit"
-            onClick={() => searchItems(searchInput)}
+            onClick={() =>
+              searchInput.length > 0
+                ? searchItems(searchInput)
+                : alert("Empty Input")
+            }
             color="primary"
           >
             Search

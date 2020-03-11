@@ -57,11 +57,22 @@ const ItemCard = ({ item, addToList }) => {
           <InputGroup>
             <Input
               onChange={val => setQuantity(val.target.value)}
+              onKeyPress={e =>
+                e.key === "Enter"
+                  ? quantity.length > 0
+                    ? addToList(item, Number(quantity))
+                    : alert("Empty Input")
+                  : null
+              }
               placeholder="Add in gram"
             />
             <InputGroupAddon addonType="append">
               <Button
-                onClick={() => addToList(item, Number(quantity))}
+                onClick={() =>
+                  quantity.length > 0
+                    ? addToList(item, Number(quantity))
+                    : alert("Empty Input")
+                }
                 color="primary"
               >
                 Add To List
