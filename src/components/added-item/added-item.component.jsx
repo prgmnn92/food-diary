@@ -9,7 +9,6 @@ const AddedItem = ({ item, id, removeItem }) => {
 
   if (item.fats > item.proteins && item.fats > item.carbohydrates) {
     infoColor = "danger";
-    console.log("DANGER");
   } else if (item.proteins > item.fats && item.proteins > item.carbohydrates) {
     infoColor = "success";
   } else {

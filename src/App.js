@@ -33,7 +33,6 @@ class App extends React.Component {
         params
       })
       .then(response => {
-        console.log(response);
         this.setState({ hits: [...response.data.hits] });
       })
       .catch(error => {
@@ -47,7 +46,6 @@ class App extends React.Component {
         params
       })
       .then(res => {
-        console.log(res);
         this.setState({
           item: res.data
         });
